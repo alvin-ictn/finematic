@@ -3,7 +3,6 @@ import { ErrorBoundary } from "react-error-boundary";
 import { RouterProvider } from "react-router-dom";
 import "./App.css";
 import ErrorFallback from "./components/error-fallback";
-import { useTMDBConfig } from "./hooks/use-tmdb-config";
 import { router } from "./router";
 
 const queryClient = new QueryClient();
