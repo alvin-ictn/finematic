@@ -8,15 +8,18 @@ import type {
 import axios, { type AxiosInstance, type AxiosResponse } from "axios";
 
 const API_KEY = import.meta.env.VITE_TMDB_API_KEY;
+
+const MODE = import.meta.env.MODE
+
 const BASE_URL = "https://api.themoviedb.org/3";
 
-if (!API_KEY) {
+if (!API_KEY && MODE !== "test") {
   console.error(
     "TMDB API Key is not set. Please set VITE_TMDB_API_KEY in your .env file."
   );
 }
 
-const tmdb: AxiosInstance = axios.create({
+export const tmdb: AxiosInstance = axios.create({
   baseURL: BASE_URL,
   headers: {
     Authorization: `Bearer ${API_KEY}`,
@@ -77,8 +80,11 @@ export const searchMovies = async (
 export const getMovieDetails = async (id: string) => {
   try {
     const response = await tmdb.get(`/movie/${id}`);
-    console.log("ID", id, response);
-    return response.data;
+    if("data" in response) {
+      return response.data
+    }
+    return response;
+
   } catch (error) {
     console.error(`Failed to fetch movie details for ID "${id}"`, error);
 

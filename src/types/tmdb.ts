@@ -48,8 +48,39 @@ export interface MovieProps {
   vote_count: number;
 }
 
+interface CollectionsProps {
+  id: number;
+  name: string;
+  poster_path: string;
+  backdrop_path: string;
+}
+
+interface ProductionCompanyProps {
+  id: number;
+  logo_path: string;
+  name: string;
+  origin_country: string;
+}
+
+interface ProductionCountriesProps {
+  iso_3166_1: string;
+  name: string;
+}
+
+interface SpokenLanguagesProps {
+  english_name: string;
+  iso_639_1: string;
+  name: string;
+}
 export interface MovieDetailsProps extends MovieProps {
   runtime: number;
+  belongs_to_collection: CollectionsProps | null;
+  homepage: string | null;
+  imdb_id: string | null;
+  origin_country: string[];
+  production_companies: ProductionCompanyProps[];
+  production_countries: ProductionCountriesProps[];
+  spoken_languages: SpokenLanguagesProps[];
   genres: { id: number; name: string }[];
   status: string;
   tagline: string;

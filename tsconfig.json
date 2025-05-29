@@ -1,6 +1,20 @@
 {
-   "compilerOptions": {
-    "baseUrl": ".",
+  "compilerOptions": {
+    "target": "ESNext",
+    "useDefineForClassFields": true,
+    "lib": ["DOM", "DOM.Iterable", "ESNext"], // Common libs
+    "allowJs": false,
+    "skipLibCheck": true,
+    "esModuleInterop": true, // <--- ADD THIS HERE
+    "allowSyntheticDefaultImports": true, // Often implicitly set true by esModuleInterop, but good to be explicit
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "module": "ESNext",
+    "moduleResolution": "bundler", // Common for Vite
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "react-jsx",
     "paths": {
       "@/*": ["./src/*"]
     }
