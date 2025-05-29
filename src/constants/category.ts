@@ -1,30 +1,37 @@
-import type { Category } from "@/types";
+export const category = {
+  POPULAR: "popular",
+  NOW_PLAYING: "now_playing",
+  TOP_RATED: "top_rated",
+  UPCOMING: "upcoming",
+} as const;
+
+export type CategoryProps = typeof category[keyof typeof category];
 
 export const categoriesList: {
-  id: Category;
+  id: CategoryProps;
   name: string;
 }[] = [
   {
-    id: "popular",
+    id: category.POPULAR,
     name: "Popular",
   },
   {
-    id: "now_playing",
+    id: category.NOW_PLAYING,
     name: "Now Playing",
   },
   {
-    id: "top_rated",
+    id: category.TOP_RATED,
     name: "Top Rated",
   },
   {
-    id: "upcoming",
+    id: category.UPCOMING,
     name: "Coming Soon",
   },
 ];
 
 export const categoriesEndpoint: Record<string, string> = {
-  now_playing: "/movie/now_playing",
-  popular: "/movie/popular",
-  top_rated: "/movie/top_rated",
-  upcoming: "/movie/upcoming",
+  [category.NOW_PLAYING]: "/movie/now_playing",
+  [category.POPULAR]: "/movie/popular",
+  [category.TOP_RATED]: "/movie/top_rated",
+  [category.UPCOMING]: "/movie/upcoming",
 };

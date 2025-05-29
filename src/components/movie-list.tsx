@@ -1,5 +1,6 @@
-import { Loader2Icon } from "lucide-react";
 import MovieCard from "./movie-card";
+import type { MovieProps } from "@/types/tmdb";
+import { LoadingSpinner } from "./loading-spinner";
 
 const MovieNotFound = () => {
   return (
@@ -14,21 +15,11 @@ const MovieNotFound = () => {
   );
 };
 
-const EndScroll = () => {
-  return (
-    <div className="text-center py-12">
-      <div className="inline-block px-6 py-3 bg-gray-900/50 backdrop-blur-xl rounded-full border border-white/10">
-        You've reached the end of the list
-      </div>
-    </div>
-  );
-};
-
 interface MovieListProps {
-  movies: any[];
+  movies: (MovieProps & { fromPage: number })[];
   isLoading: boolean;
   hasMore: boolean;
-  loadingRef: (node: any) => void;
+  loadingRef: (node: HTMLElement | null) => void;
 }
 
 const MovieList = ({
@@ -37,25 +28,33 @@ const MovieList = ({
   hasMore,
   loadingRef,
 }: MovieListProps) => {
+  if (movies.length === 0) {
+    return (
+      <div className="px-12 py-8">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+          {Array.from({ length: 20 }).map((_, index) => (
+            <MovieCard key={`placeholder-${index}`} variant="placeholder" />
+          ))}
+        </div>
+      </div>
+    );
+  }
   return (
     <div className="px-12 py-8">
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {movies.map((movie) => (
-          <MovieCard key={movie.id} movie={movie} />
+          <MovieCard
+            key={`${movie.fromPage}-${movie.id}-${movie.title}`}
+            movie={movie}
+          />
         ))}
       </div>
 
       {(isLoading || hasMore) && (
         <div ref={loadingRef} className="flex justify-center py-12">
-          {isLoading && (
-            <div className="flex items-center gap-2">
-              <Loader2Icon className="h-5 w-5 animate-spin" />
-            </div>
-          )}
+          {isLoading && <LoadingSpinner />}
         </div>
       )}
-
-      {!isLoading && !hasMore && movies.length > 0 && <EndScroll />}
 
       {!isLoading && movies.length === 0 && <MovieNotFound />}
     </div>

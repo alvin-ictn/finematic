@@ -1,34 +1,50 @@
-import { useCallback, useRef, useState } from 'react'
+import { useCallback, useEffect, useRef } from "react";
+
 interface UseInfiniteScrollOptions {
-  threshold?: number
-  initialPage?: number
+  onIntersect: () => void;
+  hasMore: boolean;
+  loading: boolean;
+  threshold?: number;
 }
-export function useInfiniteScroll({ 
+
+export function useInfiniteScroll({
+  onIntersect,
+  hasMore,
+  loading,
   threshold = 0.8,
-  initialPage = 1
-}: UseInfiniteScrollOptions = {}) {
-  const [page, setPage] = useState(initialPage)
-  const [hasMore, setHasMore] = useState(true)
-  const observer = useRef<IntersectionObserver | null>(null)
+}: UseInfiniteScrollOptions) {
+  const observer = useRef<IntersectionObserver | null>(null);
 
-  const lastElementRef = useCallback((node: HTMLElement | null) => {
-    if (!node) return
-    if (observer.current) {
-      observer.current.disconnect()
-    }
-    observer.current = new IntersectionObserver(entries => {
-      if (entries[0].isIntersecting && hasMore) {
-        setPage(prevPage => prevPage + 1)
+  const lastElementRef = useCallback(
+    (node: HTMLElement | null) => {
+      if (loading) return;
+      if (observer.current) {
+        observer.current.disconnect();
       }
-    }, {
-      threshold
-    })
-    observer.current.observe(node)
-  }, [hasMore, threshold])
+      if (node) {
+        observer.current = new IntersectionObserver(
+          (entries) => {
+            if (entries[0].isIntersecting && hasMore) {
+              onIntersect();
+            }
+          },
+          {
+            threshold,
+          }
+        );
+        observer.current.observe(node);
+      }
+    },
+    [onIntersect, hasMore, loading, threshold]
+  );
 
-  const resetPage = useCallback(() => {
-    setPage(initialPage)
-  }, [initialPage])
-  
-  return { page, setPage, hasMore, setHasMore, lastElementRef, resetPage }
+  useEffect(() => {
+    return () => {
+      if (observer.current) {
+        observer.current.disconnect();
+      }
+    };
+  }, []);
+
+  return { lastElementRef };
 }
