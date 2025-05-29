@@ -22,7 +22,7 @@ const BackToTopButton = () => {
       onClick={scrollToTop}
       aria-label="Back to top"
       className={cn(
-        "fixed bottom-6 right-6 z-50 p-3 rounded-full bg-black text-white shadow-lg hover:bg-gray-800 transition-opacity duration-300",
+        "fixed bottom-6 right-6 z-50 p-3 rounded-full bg-gray-950 text-white shadow-lg hover:bg-gray-800 transition-opacity duration-300",
         visible ? "opacity-100" : "opacity-0 pointer-events-none"
       )}
     >

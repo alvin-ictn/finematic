@@ -4,11 +4,10 @@
 @custom-variant dark (&:is(.dark *));
 
 #root {
-  max-width: 1280px;
   margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
   width: 100%;
+  min-height: 100vh;
+  background-color: var(--foreground);
 }
 
 .logo {
@@ -171,6 +170,6 @@
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-gray-950 text-background;
   }
 }

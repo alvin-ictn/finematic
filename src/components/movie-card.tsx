@@ -49,7 +49,7 @@ const MovieCard = (props: MovieCardProps) => {
       `}
     >
       {movie.vote_average > 0 && (
-        <div className="absolute top-3 right-3 bg-black/70 backdrop-blur-sm rounded-full px-2 py-1 flex items-center space-x-1 z-50">
+        <div className="absolute top-3 right-3 bg-gray-950/70 backdrop-blur-sm rounded-full px-2 py-1 flex items-center space-x-1 z-50">
           <StarIcon className="w-3 h-3 text-amber-300" fill="currentColor" />
           <span className="text-white text-xs font-medium">
             {movie.vote_average.toFixed(1)}

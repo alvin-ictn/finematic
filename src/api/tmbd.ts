@@ -1,6 +1,7 @@
 import { categoriesEndpoint } from "@/constants/category";
 import type {
   ConfigResponseProps,
+  CreditsProps,
   MovieListResponseProps,
   MovieProps,
 } from "@/types/tmdb";
@@ -15,7 +16,7 @@ if (!API_KEY) {
   );
 }
 
-const tmbd: AxiosInstance = axios.create({
+const tmdb: AxiosInstance = axios.create({
   baseURL: BASE_URL,
   headers: {
     Authorization: `Bearer ${API_KEY}`,
@@ -24,7 +25,7 @@ const tmbd: AxiosInstance = axios.create({
 
 export const getConfiguration = async (): Promise<ConfigResponseProps> => {
   try {
-    const response: AxiosResponse<ConfigResponseProps> = await tmbd.get(
+    const response: AxiosResponse<ConfigResponseProps> = await tmdb.get(
       "/configuration"
     );
 
@@ -43,7 +44,7 @@ export const getMoviesByCategory = async (
   try {
     const endpoint = categoriesEndpoint[category] || categoriesEndpoint.popular;
     const response: AxiosResponse<MovieListResponseProps<MovieProps>> =
-      await tmbd.get(endpoint, {
+      await tmdb.get(endpoint, {
         params: { page },
       });
 
@@ -61,7 +62,7 @@ export const searchMovies = async (
 ): Promise<MovieListResponseProps<MovieProps>> => {
   try {
     const response: AxiosResponse<MovieListResponseProps<MovieProps>> =
-      await tmbd.get("/search/movie", {
+      await tmdb.get("/search/movie", {
         params: { query, page },
       });
 
@@ -75,16 +76,28 @@ export const searchMovies = async (
 
 export const getMovieDetails = async (id: string) => {
   try {
-    const response = await tmbd.get(`/movie/${id}`, {
-      params: {
-        append_to_response: "credits",
-      },
-    });
-
+    const response = await tmdb.get(`/movie/${id}`);
+    console.log("ID", id, response);
     return response.data;
   } catch (error) {
     console.error(`Failed to fetch movie details for ID "${id}"`, error);
-    
+
+    throw {
+      error: error,
+      id: id,
+      custom_message: `Failed to fetch movie details for ID "${id}"`,
+    };
+  }
+};
+
+export const getMovieCredits = async (id: string) => {
+  try {
+    const response = await tmdb.get<CreditsProps>(`/movie/${id}/credits`);
+
+    return response.data;
+  } catch (error) {
+    console.error(`Failed to fetch movie credits for ID "${id}"`, error);
+
     throw error;
   }
 };

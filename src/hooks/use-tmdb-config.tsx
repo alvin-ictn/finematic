@@ -1,6 +1,12 @@
 import { getConfiguration } from "@/api/tmbd";
-import { type ConfigResponseProps, type PosterSizeProps } from "@/types/tmdb";
+import {
+  type BackdropSizeProps,
+  type ConfigResponseProps,
+  type PosterSizeProps,
+  type ProfileSizeProps,
+} from "@/types/tmdb";
 import { useQuery } from "@tanstack/react-query";
+
 export const useTMDBConfig = () => {
   const {
     data: config,
@@ -25,11 +31,33 @@ export const useTMDBConfig = () => {
     return `${config.images.secure_base_url}${size}${posterPath}`;
   };
 
+  const getBackdropUrl = (
+    backdropPath: string | null,
+    size: BackdropSizeProps = "original"
+  ): string | null => {
+    if (!config || !backdropPath) {
+      return null;
+    }
+    return `${config.images.secure_base_url}${size}${backdropPath}`;
+  };
+
+  const getProfileUrl = (
+    profilePath: string | null,
+    size: ProfileSizeProps = "original"
+  ): string | null => {
+    if (!config || !profilePath) {
+      return null;
+    }
+    return `${config.images.secure_base_url}${size}${profilePath}`;
+  };
+
   return {
     config,
     isLoading: isLoadingConfig,
     isError: isErrorConfig,
     error: errorConfig,
     getPosterUrl,
+    getBackdropUrl,
+    getProfileUrl
   };
 };

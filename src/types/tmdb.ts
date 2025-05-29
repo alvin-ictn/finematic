@@ -48,6 +48,16 @@ export interface MovieProps {
   vote_count: number;
 }
 
+export interface MovieDetailsProps extends MovieProps {
+  runtime: number;
+  genres: { id: number; name: string }[];
+  status: string;
+  tagline: string;
+  budget: number;
+  revenue: number;
+  vote_count: number;
+}
+
 export interface MovieListResponseProps<T> {
   page: number;
   results: T[];
@@ -58,4 +68,22 @@ export interface MovieListResponseProps<T> {
 export interface MovieListInfinityProps<T> {
   page: number[];
   pages: T[];
+}
+
+export interface CastProps {
+  id: number;
+  name: string;
+  character: string;
+  profile_path: string | null;
+}
+export interface CrewProps {
+  id: number;
+  name: string;
+  job: string;
+  department: string;
+  profile_path: string | null;
+}
+export interface CreditsProps {
+  cast: CastProps[];
+  crew: CrewProps[];
 }
