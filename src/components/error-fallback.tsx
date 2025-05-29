@@ -11,7 +11,7 @@ type ErrorFallbackProps = {
   };
 };
 
-const ErrorDetailPage: FC<ErrorFallbackProps> = ({ error }) => {
+const ErrorFallback: FC<ErrorFallbackProps> = ({ error }) => {
   const navigate = useNavigate();
 
   return (
@@ -39,4 +39,4 @@ const ErrorDetailPage: FC<ErrorFallbackProps> = ({ error }) => {
   );
 };
 
-export default ErrorDetailPage;
+export default ErrorFallback;
