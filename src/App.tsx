@@ -9,21 +9,6 @@ import { router } from "./router";
 const queryClient = new QueryClient();
 
 export default function App() {
-  const { isLoading, isError, error } = useTMDBConfig();
-
-  if (isLoading) {
-    return <div className="text-center p-8">Loading app configuration...</div>;
-  }
-
-  if (isError) {
-    return (
-      <div className="text-center p-8 text-red-500">
-        Error loading app configuration: {error?.message}
-        <p>Please check your internet connection or API key.</p>
-      </div>
-    );
-  }
-
   return (
     <QueryClientProvider client={queryClient}>
       <ErrorBoundary FallbackComponent={ErrorFallback}>
