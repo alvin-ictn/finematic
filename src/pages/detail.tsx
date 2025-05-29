@@ -5,7 +5,7 @@ import { useNavigate, useParams } from "react-router-dom";
 
 import { getMovieCredits, getMovieDetails } from "@/api/tmbd";
 import { LoadingSpinner } from "@/components/loading-spinner";
-import { MoviePosterPlaceholder } from "@/components/movie-poster-placeholder";
+import { MoviePosterPlaceholder } from "@/components/fallback/movie-poster-placeholder";
 import { useTMDBConfig } from "@/hooks/use-tmdb-config";
 import { type MovieDetailsProps } from "@/types/tmdb";
 import { useErrorBoundary } from "react-error-boundary";

@@ -3,7 +3,8 @@ import type { MovieProps } from "@/types/tmdb";
 import { StarIcon } from "lucide-react";
 import { memo } from "react";
 import { Link } from "react-router-dom";
-import { MoviePosterPlaceholder } from "./movie-poster-placeholder";
+import { MoviePosterPlaceholder } from "./fallback/movie-poster-placeholder";
+import MovieCardSkeleton from "./fallback/movie-card-skeleton";
 
 type MovieCardProps =
   | { variant?: "default"; movie: MovieProps }
@@ -13,22 +14,7 @@ const MovieCard = (props: MovieCardProps) => {
   const { getPosterUrl } = useTMDBConfig();
 
   if (props.variant === "placeholder") {
-    return (
-      <div className="animate-pulse relative h-[350px] rounded-xl overflow-hidden bg-gray-300/20 dark:bg-gray-700/20">
-        <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent">
-          <MoviePosterPlaceholder
-            title={"Movie"}
-            className="w-full h-full object-cover"
-          />
-        </div>
-        <div className="absolute bottom-0 p-6 w-full space-y-3">
-          <div className="h-5 bg-gray-400/30 rounded w-3/4" />
-          <div className="h-4 bg-gray-400/20 rounded w-1/2" />
-          <div className="h-4 bg-gray-400/20 rounded w-full" />
-          <div className="h-4 bg-gray-400/20 rounded w-5/6" />
-        </div>
-      </div>
-    );
+    return <MovieCardSkeleton />;
   }
 
   const { movie } = props;

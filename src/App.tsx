@@ -12,23 +12,7 @@ export default function App() {
     <QueryClientProvider client={queryClient}>
       <ErrorBoundary FallbackComponent={ErrorFallback}>
         <RouterProvider router={router} />
-      </ErrorBoundary>
-      {/* <BrowserRouter>
-        <Routes>
-          <Route>
-            <Route index element={<Home />} />
-            <Route
-              path="/movie/:id"
-              element={
-                <ErrorBoundary FallbackComponent={ErrorDetailPage}>
-                  <MovieDetail />
-                </ErrorBoundary>
-              }
-            />
-            <Route path="*" element={<NotFound />} />
-          </Route>
-        </Routes>
-      </BrowserRouter> */}
+      </ErrorBoundary> 
     </QueryClientProvider>
   );
 }

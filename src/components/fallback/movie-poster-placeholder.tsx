@@ -17,6 +17,7 @@ export const MoviePosterPlaceholder: React.FC<MoviePosterPlaceholderProps> = ({
         "bg-gradient-to-br from-gray-800 via-gray-700 to-gray-900 flex flex-col items-center justify-center text-center p-4",
         className
       )}
+      data-testid="poster-placeholder"
     >
       <div className="mb-3">
         <Film className="w-12 h-12 text-gray-400" />

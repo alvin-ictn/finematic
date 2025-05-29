@@ -2,7 +2,7 @@ import type { ConfigResponseProps } from "@/types/tmdb";
 
 export const mockConfigResponse: ConfigResponseProps = {
   images: {
-    base_url: "http://image.tmdb.org/t/p/",
+    base_url: "https://image.tmdb.org/t/p/",
     secure_base_url: "https://image.tmdb.org/t/p/",
     backdrop_sizes: ["w300", "w780", "w1280", "original"],
     logo_sizes: ["w45", "w92", "w154", "w185", "w300", "w500", "original"],
