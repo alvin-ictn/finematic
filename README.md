@@ -12,7 +12,7 @@ This project is a submission for the frontend technical test, built using **Reac
 
 ## 🛠 Tech Stack
 
-- React 18
+- React 19
 - TypeScript
 - Tailwind CSS
 - React Router 7
