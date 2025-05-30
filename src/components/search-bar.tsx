@@ -18,7 +18,7 @@ const SearchBar: FC<SearchBar> = ({ searchQuery }) => {
       )}
     >
       <div className="absolute top-0 z-50 h-full flex items-center justify-center w-14">
-        <Search className="h-5 w-5 text-black" />
+        <Search className="h-5 w-5 text-white" />
       </div>
       <input
         type="text"
@@ -27,15 +27,10 @@ const SearchBar: FC<SearchBar> = ({ searchQuery }) => {
         ref={inputRef}
         onFocus={() => setIsFocused(true)}
         onBlur={() => setIsFocused(false)}
-        // value={""}
         onChange={searchQuery}
-        className="w-full pl-14 pr-4 py-4 text-lg bg-white/10 border-white/20 rounded-2xl outline-none text-black placeholder:text-gray-400 transition-all duration-300"
+        className="w-full pl-14 pr-4 py-4 text-lg rounded-2xl outline-none  transition-all duration-300"
       />
-      <div className="h-full relative pr-4">
-        <button type="submit" className="text-white">
-          Search
-        </button>
-      </div>
+
     </form>
   );
 };

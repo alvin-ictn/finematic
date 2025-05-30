@@ -63,7 +63,7 @@ const MovieCard = (props: MovieCardProps) => {
 
       <div className="absolute inset-0 p-6 flex flex-col justify-end transform transition-transform duration-300">
         <div className="transition-transform duration-300 transform translate-y-16 group-hover:translate-y-0">
-          <h3 className="text-lg font-semibold text-white line-clamp-2 min-h-[3.2rem]">
+          <h3 className="text-lg font-semibold text-white line-clamp-2 min-h-[3.2rem] text-center">
             {movie.title}
           </h3>
           <div className="text-sm text-gray-400 flex flex-wrap gap-x-2 mb-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">

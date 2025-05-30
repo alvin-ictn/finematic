@@ -1,5 +1,6 @@
 import { getMoviesByCategory, searchMovies } from "@/api/tmbd";
 import BackToTopButton from "@/components/back-to-top";
+import { CategoryTabs } from "@/components/category-tabs";
 import MovieList from "@/components/movie-list";
 import SearchBar from "@/components/search-bar";
 import { categoriesList, type CategoryProps } from "@/constants/category";
@@ -73,29 +74,20 @@ const Home = () => {
   }, [category, debouncedSearch, refetch]);
 
   return (
-    <main className="">
+    <main className="container mx-auto px-4 py-8">
       {isError && (
         <div className="text-red-600 text-center py-4">
           Error: {error?.message ?? "Failed to load movies."}
         </div>
       )}
       <div>
-        <SearchBar
-          searchQuery={(e) => setSearchQuery(() => e.target.value)}
-        />
+        <SearchBar searchQuery={(e) => setSearchQuery(() => e.target.value)} />
       </div>
-      <input
-        className="border border-black"
-        onChange={(e) => setSearchQuery(() => e.target.value)}
+      <CategoryTabs
+        activeCategory={category}
+        onCategoryChange={(category) => setCategory(category as CategoryProps)}
+        list={categoriesList}
       />
-      {categoriesList.map((category) => (
-        <button
-          key={category.id}
-          onClick={() => setCategory(() => category.id)}
-        >
-          {category.name}
-        </button>
-      ))}
       <MovieList
         movies={allMovies}
         isLoading={isLoading || isFetching}

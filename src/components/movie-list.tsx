@@ -28,7 +28,7 @@ const MovieList = ({
   hasMore,
   loadingRef,
 }: MovieListProps) => {
-  if (movies.length === 0) {
+  if (movies.length === 0 && isLoading) {
     return (
       <div className="px-12 py-8">
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
