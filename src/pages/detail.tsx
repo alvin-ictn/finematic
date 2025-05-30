@@ -72,7 +72,7 @@ const MovieDetail: React.FC = () => {
   }
 
   return (
-    <div className="bg-gray-950 min-h-screen">
+    <div className="bg-gray-950 min-h-screen" data-testid="detail-page">
       <div className="relative w-full h-[50vh] md:h-[70vh]">
         <div className="absolute inset-0 overflow-hidden">
           <div

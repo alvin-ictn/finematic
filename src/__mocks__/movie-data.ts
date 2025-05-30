@@ -1,4 +1,8 @@
-import type { MovieDetailsProps, MovieListResponseProps, MovieProps } from "@/types/tmdb";
+import type {
+  MovieDetailsProps,
+  MovieListResponseProps,
+  MovieProps,
+} from "@/types/tmdb";
 
 export const mockMovie: MovieProps = {
   adult: false,
@@ -16,6 +20,24 @@ export const mockMovie: MovieProps = {
   video: false,
   vote_average: 7.1,
   vote_count: 290,
+};
+
+export const searchMockMovie: MovieProps = {
+  adult: false,
+  backdrop_path: "/uIpJPDNFoeX0TVml9smPrs9KUVx.jpg",
+  genre_ids: [27, 9648],
+  id: 574475,
+  original_language: "en",
+  original_title: "Final Destination Bloodlines",
+  overview:
+    "Plagued by a violent recurring nightmare, college student Stefanie heads home to track down the one person who might be able to break the cycle and save her family from the grisly demise that inevitably awaits them all.",
+  popularity: 423.5113,
+  poster_path: "/6WxhEvFsauuACfv8HyoVX6mZKFj.jpg",
+  release_date: "2025-05-14",
+  title: "Final Destination Bloodlines",
+  video: false,
+  vote_average: 7.036,
+  vote_count: 481,
 };
 
 export const mockMovieListResponse: MovieListResponseProps<MovieProps> = {

@@ -4,6 +4,8 @@ import { render, screen } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 import MovieCard from "../movie-card";
 
+const { images: imgConfig } = mockConfigResponse;
+
 jest.mock("@/hooks/use-tmdb-config", () => ({
   useTMDBConfig: () => ({
     getPosterUrl: (path: string | null, size: string) => {
@@ -46,7 +48,6 @@ describe("movie-card component", () => {
     render(<MovieCard movie={mockMovie} />, {
       wrapper: MemoryRouter,
     });
-    const { images: imgConfig } = mockConfigResponse;
 
     const img = screen.getByRole("img");
     expect(img).toHaveAttribute(

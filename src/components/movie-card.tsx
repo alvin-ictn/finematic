@@ -28,6 +28,7 @@ const MovieCard = (props: MovieCardProps) => {
   return (
     <Link
       to={`/movie/${movie.id}`}
+      data-testid={`movie-card-link-${movie.id}`}
       className={`
         group relative h-[350px] rounded-xl overflow-hidden
         transform transition-all duration-500

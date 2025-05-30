@@ -15,7 +15,10 @@ const ErrorFallback: FC<ErrorFallbackProps> = ({ error }) => {
   const navigate = useNavigate();
 
   return (
-    <div className="container mx-auto px-4 py-16 text-center min-h-screen h-screen flex justify-center items-center">
+    <div
+      className="container mx-auto px-4 py-16 text-center min-h-screen h-screen flex justify-center items-center"
+      data-testid="error-fallback"
+    >
       <div className="flex items-center flex-col bg-red-900/20 text-red-400 p-6 rounded-lg max-w-md mx-auto">
         <h2 className="text-xl font-bold mb-2">Error Loading Movie</h2>
 

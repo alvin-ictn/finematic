@@ -23,6 +23,7 @@ const SearchBar: FC<SearchBar> = ({ searchQuery }) => {
       <input
         type="text"
         placeholder="Search for movies..."
+        data-testid="search-movie"
         ref={inputRef}
         onFocus={() => setIsFocused(true)}
         onBlur={() => setIsFocused(false)}
