@@ -52,7 +52,7 @@ describe("movie-card component", () => {
     const img = screen.getByRole("img");
     expect(img).toHaveAttribute(
       "src",
-      `${imgConfig.base_url}w342/mKKqV23MQ0uakJS8OCE2TfV5jNS.jpg`
+      `${imgConfig.secure_base_url}w342/mKKqV23MQ0uakJS8OCE2TfV5jNS.jpg`
     );
   });
 
