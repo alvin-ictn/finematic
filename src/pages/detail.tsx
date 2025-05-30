@@ -114,11 +114,11 @@ const MovieDetail: React.FC = () => {
           </div>
 
           <div className="flex-1">
-            <h1 className="text-3xl md:text-4xl font-bold text-white">
+            <h1 className="text-3xl md:text-4xl font-bold text-white" data-testid="detail-page-title">
               {movie?.title}
             </h1>
             {movie?.tagline && (
-              <p className="text-lg text-gray-400 mt-2 italic">
+              <p className="text-lg text-gray-400 mt-2 italic" data-testid="detail-page-tagline">
                 {movie?.tagline}
               </p>
             )}
