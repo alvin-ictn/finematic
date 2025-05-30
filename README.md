@@ -20,7 +20,6 @@ This project is a submission for the frontend technical test, built using **Reac
 
 ## 🚀 Getting Started
 
-```bash
 # Install dependencies
 npm install
 
