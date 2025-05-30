@@ -66,9 +66,13 @@ describe("MovieDetail Page", () => {
     expect(await screen.findByTestId("detail-page")).toBeInTheDocument();
 
     const titleSection = await screen.findByTestId("detail-page-title");
-    expect(within(titleSection).getByText(mockMovieDetails.title)).toBeInTheDocument();
+    expect(
+      within(titleSection).getByText(mockMovieDetails.title)
+    ).toBeInTheDocument();
 
-    const taglineSection =  await screen.findByTestId("detail-page-tagline");
-    expect(within(taglineSection).getByText(mockMovieDetails.tagline)).toBeInTheDocument();
+    const taglineSection = await screen.findByTestId("detail-page-tagline");
+    expect(
+      within(taglineSection).getByText(mockMovieDetails.tagline)
+    ).toBeInTheDocument();
   });
 });
