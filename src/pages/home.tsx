@@ -1,6 +1,7 @@
 import { getMoviesByCategory, searchMovies } from "@/api/tmbd";
 import BackToTopButton from "@/components/back-to-top";
 import { CategoryTabs } from "@/components/category-tabs";
+import { MovieHero } from "@/components/movie-hero";
 import MovieList from "@/components/movie-list";
 import SearchBar from "@/components/search-bar";
 import { categoriesList, type CategoryProps } from "@/constants/category";
@@ -11,7 +12,7 @@ import type {
   MovieListResponseProps,
   MovieProps,
 } from "@/types/tmdb";
-import { useInfiniteQuery } from "@tanstack/react-query";
+import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
 import React, { useEffect, useMemo, useState } from "react";
 
 const Home = () => {
@@ -26,6 +27,7 @@ const Home = () => {
     isFetchingNextPage,
     isFetching,
     isLoading,
+    isFetched: isMovieFetched,
     isError,
     error,
     refetch,
@@ -55,6 +57,11 @@ const Home = () => {
     enabled: !!category,
   });
 
+  const { data: featuredMoviesData, isFetched } = useQuery({
+    queryKey: ["featured-movies"],
+    queryFn: () => getMoviesByCategory("popular", 1),
+  });
+
   const allMovies: (MovieProps & { fromPage: number })[] = useMemo(() => {
     return (
       data?.pages.flatMap((page) =>
@@ -73,29 +80,51 @@ const Home = () => {
     refetch();
   }, [category, debouncedSearch, refetch]);
 
-  return (
-    <main className="container mx-auto px-4 py-8">
-      {isError && (
-        <div className="text-red-600 text-center py-4">
-          Error: {error?.message ?? "Failed to load movies."}
-        </div>
-      )}
-      <div>
-        <SearchBar searchQuery={(e) => setSearchQuery(() => e.target.value)} />
+  if (isError) {
+    return (
+      <div className="text-red-600 text-center py-4">
+        Error: {error?.message ?? "Failed to load movies."}
       </div>
-      <CategoryTabs
-        activeCategory={category}
-        onCategoryChange={(category) => setCategory(category as CategoryProps)}
-        list={categoriesList}
-      />
-      <MovieList
-        movies={allMovies}
-        isLoading={isLoading || isFetching}
-        hasMore={hasNextPage}
-        loadingRef={lastElementRef}
-      />
+    );
+  }
+
+  return (
+    <div className="">
+      {featuredMoviesData && isFetched && (
+        <MovieHero movie={featuredMoviesData?.results[0]} />
+      )}
+      <main className="container mx-auto px-4 py-8">
+        <div>
+          <SearchBar
+            searchQuery={(e) => setSearchQuery(() => e.target.value)}
+          />
+        </div>
+        {!searchQuery ? (
+          <CategoryTabs
+            activeCategory={category}
+            onCategoryChange={(category) =>
+              setCategory(category as CategoryProps)
+            }
+            list={categoriesList}
+          />
+        ) : (
+          isMovieFetched &&
+          data &&
+          data.pages[0].total_results > 0 && (
+            <h2 className="text-2xl">
+              Found {data.pages[0].total_results} movies matching your search.
+            </h2>
+          )
+        )}
+        <MovieList
+          movies={allMovies}
+          isLoading={isLoading || isFetching}
+          hasMore={hasNextPage}
+          loadingRef={lastElementRef}
+        />
+      </main>
       <BackToTopButton />
-    </main>
+    </div>
   );
 };
 export default Home;
